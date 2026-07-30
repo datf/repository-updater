@@ -26,5 +26,34 @@ inputs:
     required: false
 
 runs:
-  using: "docker"
-  image: "action/Dockerfile"
+  using: 'composite'
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.12'
+
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install repository-updater==2.0.1
+
+    - name: Run repository-updater
+      shell: bash
+      run: |
+        if [[ -n "${{ inputs.repository }}" ]]; then
+          ARGS+=( --repository "${{ inputs.repository }}" )
+        fi
+
+        if [[ -n "${{ inputs.app }}" ]]; then
+          ARGS+=( --app "${{ inputs.app }}" )
+        elif [[ -n "${{ inputs.addon }}" ]]; then
+          ARGS+=( --addon "${{ inputs.addon }}" )
+        fi
+
+        if [[ "${{ inputs.force }}" == 'true' ]]; then
+          ARGS+=( --force )
+        fi
+
+        repository-updater --token "${{ inputs.token }}" "${ARGS[@]}"
