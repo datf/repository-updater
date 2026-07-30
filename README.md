@@ -1,3 +1,7 @@
+> [!WARNING]
+> This fork executes the repository-updater script in the runner rather than a
+> docker container.  Use at your own risk.
+
 # Home Assistant Community Apps Repository Updater
 
 [![PyPi Release][pypi-shield]][pypi]
