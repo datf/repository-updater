@@ -32,7 +32,7 @@ classifiers = [
 dependencies = [
   "click==8.5.0",
   "emoji==2.16.0",
-  "GitPython==3.1.62",
+  "GitPython==3.2.0",
   "Jinja2==3.1.6",
   "PyGithub==2.10.0",
   "PyYAML==6.0.3",
@@ -49,7 +49,7 @@ repository-updater = "repositoryupdater.cli:repository_updater"
 repository-updater-git-askpass = "repositoryupdater.cli:git_askpass"
 
 [dependency-groups]
-dev = ["ruff==0.16.9"]
+dev = ["ruff==0.16.10"]
 
 [tool.setuptools.packages.find]
 include = ["repositoryupdater*"]
